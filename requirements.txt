@@ -1,5 +1,7 @@
 Flask<2.0
-gunicorn
 flask-cors
 MarkupSafe<2.1
+gunicorn
 openai
+dirtyjson
+requests
