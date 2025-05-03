@@ -5,3 +5,4 @@ gunicorn
 openai
 dirtyjson
 requests
+openai==0.28.0
