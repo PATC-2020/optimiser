@@ -1,0 +1,3 @@
+Options +ExecCGI
+AddHandler fcgid-script .fcgi
+DirectoryIndex application.fcgi

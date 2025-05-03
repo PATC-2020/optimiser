@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  input[readonly], textarea[readonly] {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.5rem;
+    width: 100%;
+    margin: 0.25rem 0 1rem 0;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 1rem;
+  }
+
+  #mappingTable, #mappingTable td, #mappingTable th {
+    background-color: transparent;
+    border: 1px solid #ddd;
+  }
+  
+  .section-label {
+    background-color: #f5f5f5; /* keep soft background for section label rows only */
+    font-weight: bold;
+  }
+
+  /* Table Headers */
+  #mappingTable thead th,
+  #breakdownTable thead th {
+    background-color: #e0e0e0; /* darker grey */
+    font-weight: bold;
+  }
+
+  /* Section Labels inside table body */
+  .section-label {
+    background-color: #f5f5f5; /* lighter grey */
+    font-weight: bold;
+  }
+
+  /* First column (Attribute column) lighter grey */
+  #breakdownTable td:first-child {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  #breakdownTable td:first-child, #breakdownTable th:first-child {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  button {body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  textarea {
+    width: 100%;
+    max-width: 95%;
+  }
+  
+  .inner-problem-wrapper {
+    margin: 0 auto;
+    max-width: 960px; /* or match whatever your other sections use */
+  }
+  
+  input[readonly], textarea[readonly] {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.5rem;
+    width: 100%;
+    margin: 0.25rem 0 1rem 0;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 1rem;
+  }
+  
+  #mappingTable, #mappingTable td, #mappingTable th {
+    background-color: transparent;
+    border: 1px solid #ddd;
+  }
+  
+  /* Section Labels like "Features" and "Benefits" */
+  .section-label {
+    background-color: #f5f5f5; /* lighter grey */
+    font-weight: bold;
+  }
+  
+  /* Attribute column in Section 3 */
+  #breakdownTable td:first-child {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  /* Headers in Section 2 and Section 3 */
+  #mappingTable thead th,
+  #breakdownTable thead th {
+    background-color: #e0e0e0; /* darker grey */
+    font-weight: bold;
+  }
+  
+  button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  button:hover {
+    background-color: #005fa3;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  button:hover {
+    background-color: #005fa3;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
