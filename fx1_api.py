@@ -27,7 +27,7 @@ def query_gpt(prompt):
                     {"role": "system", "content": SYSTEM_INSTRUCTIONS},
                     {"role": "user", "content": prompt}
                 ],
-                max_tokens=2048,
+                max_tokens=4096,
                 temperature=0.4
             )
             raw_output = response["choices"][0]["message"]["content"]
