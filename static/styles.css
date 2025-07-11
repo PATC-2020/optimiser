@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+    background-color: #111;
     color: #333;
     margin: 0;
     padding: 2rem;
@@ -23,8 +23,10 @@ body {
   label {
     font-weight: bold;
     display: block;
-    margin-top: 1rem;
-  }
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
 
   #mappingTable, #mappingTable td, #mappingTable th {
     background-color: transparent;
@@ -43,119 +45,42 @@ body {
     font-weight: bold;
   }
 
-  /* Section Labels inside table body */
-  .section-label {
-    background-color: #f5f5f5; /* lighter grey */
-    font-weight: bold;
-  }
-
   /* First column (Attribute column) lighter grey */
-  #breakdownTable td:first-child {
-    background-color: #f5f5f5;
-    font-weight: bold;
-  }
-
   #breakdownTable td:first-child, #breakdownTable th:first-child {
     background-color: #f5f5f5;
     font-weight: bold;
   }
+
+  h1, h2, h3 {
+  color: #FFA500;
+}
+
   
-  button {body {
+  button {
     font-family: Arial, sans-serif;
     background-color: #fff;
+    border: none;
     color: #333;
     margin: 0;
-    padding: 2rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+    button:hover {
+    background-color: #005fa3;
   }
   
-  .section {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  textarea {
+   textarea {
     width: 100%;
-    max-width: 95%;
-  }
+    max-width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
   
   .inner-problem-wrapper {
     margin: 0 auto;
     max-width: 960px; /* or match whatever your other sections use */
   }
   
-  input[readonly], textarea[readonly] {
-    background-color: #f7f7f7;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 0.5rem;
-    width: 100%;
-    margin: 0.25rem 0 1rem 0;
-  }
-  
-  label {
-    font-weight: bold;
-    display: block;
-    margin-top: 1rem;
-  }
-  
-  #mappingTable, #mappingTable td, #mappingTable th {
-    background-color: transparent;
-    border: 1px solid #ddd;
-  }
-  
-  /* Section Labels like "Features" and "Benefits" */
-  .section-label {
-    background-color: #f5f5f5; /* lighter grey */
-    font-weight: bold;
-  }
-  
-  /* Attribute column in Section 3 */
-  #breakdownTable td:first-child {
-    background-color: #f5f5f5;
-    font-weight: bold;
-  }
-  
-  /* Headers in Section 2 and Section 3 */
-  #mappingTable thead th,
-  #breakdownTable thead th {
-    background-color: #e0e0e0; /* darker grey */
-    font-weight: bold;
-  }
-  
-  button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    background-color: #0077cc;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-  
-  button:hover {
-    background-color: #005fa3;
-  }
-  
-  textarea {
-    min-height: 100px;
-  }
-  
-    padding: 0.6rem 1.2rem;
-    border: none;
-    background-color: #0077cc;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-  
-  button:hover {
-    background-color: #005fa3;
-  }
-  
-  textarea {
-    min-height: 100px;
-  }
   
   .hero-section {
   text-align: center;
@@ -175,13 +100,6 @@ body {
   margin-top: 0.5rem;
 }
 
-label {
-  display: block;
-  color: #fff;
-  font-size: 0.95rem;
-  margin-bottom: 0.25rem;
-}
-
 .char-limit {
   color: #FFA500;
   font-weight: 400;
@@ -198,11 +116,6 @@ input[type=\"text\"], input[type=\"url\"], textarea {
   margin-bottom: 1rem;
   background-color: #fff;
   color: #000;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
 }
 
 .field-pair {
@@ -245,12 +158,6 @@ textarea {
   border-top: 1px solid #444;
   margin: 1.5rem 0;
   opacity: 0.4;
-}
-
-body {
-  background-color: #111;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
 }
 
 /* Header and Footer Additions */
@@ -296,4 +203,16 @@ body {
   padding-top: 15px;
   font-size: 0.85rem;
   color: #999;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.row input {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
 }
