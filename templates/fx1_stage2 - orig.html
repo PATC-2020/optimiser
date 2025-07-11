@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fx1 – Stage 2 (AI Report)</title>
   <link rel="stylesheet" href="/static/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> -->
+   
   <style>
     body { font-family: sans-serif; padding: 2rem; }
     .report-section { margin-bottom: 2rem; }
@@ -106,7 +107,7 @@
 
   <div class="button-container">
     <button onclick="copyReport()">Copy Report</button>
-    <button onclick="downloadPDF()">Download PDF</button>
+    <!-- <button onclick="downloadPDF()">Download PDF</button> -->
   </div>
 
   <script>
@@ -409,10 +410,10 @@
       navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard'));
     }
 
-    function downloadPDF() {
-      const el = document.getElementById('report');
-      html2pdf().from(el).save('Fx1_Report.pdf');
-    }
+//    function downloadPDF() {
+//      const el = document.getElementById('report');
+//      html2pdf().from(el).save('Fx1_Report.pdf');
+//    }
 
     function updateProgressBar(percent) {
       const bar = document.getElementById('progressBar');
