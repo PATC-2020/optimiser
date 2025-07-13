@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fx1 – Stage 2 (AI Report)</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .report-section { margin-bottom: 2rem; }
+    .report-box { background: #f7f7f7; padding: 1rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    th { background-color: #ffb400; }
+    .button-container { margin-top: 2rem; text-align: right; }
+    button { padding: 0.6rem 1.2rem; border: none; background-color: #0077cc; color: white; border-radius: 5px; cursor: pointer; margin-left: 0.5rem; }
+    .section-label { font-weight: bold; background-color: #ddd; text-align: left; padding: 0.5rem; }
+    .full-width-input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div id="loadingNotice" style="padding: 10px; background: #fff4c2; font-weight: bold; display: none;">
+    <h2>Extraction Process</h2>
+    <div id="progressStatusMessage" style="margin-top: 6px; font-size: 1rem; font-weight: normal; color: #000;">
+      <!-- Status updates will appear here -->
+    </div>
+    <div id="progressContainer" style="width: 100%; background: #eee; border-radius: 5px; margin-top: 10px;">
+      <div id="progressBar" style="width: 0%; height: 20px; background: #0077cc; border-radius: 5px; position: relative;">
+        <span id="progressText" style="position: absolute; width: 100%; text-align: center; top: 0; line-height: 20px; font-size: 12px; color: white;">0%</span>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="section" id="report">
+    <h1>Stage 2 – Exportable Report</h1>
+
+    <div class="section report-section">
+      <h2>1. Product Summary</h2>
+      <div class="report-box" id="productSummaryBox">
+        <div class="summary-grid">
+          <div class="label-box">
+            NAME
+            <span class="value" style="color: white" id="productNameField"></span>
+          </div>
+
+          <div class="summary-box">
+            SUMMARY
+            <span class="value" id="productSummaryField"></span>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="label-box">
+            CUSTOMER
+          </div>
+          <div class="summary-box value" style="color: #111; font-weight: normal" id="productCustomerField"></div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="label-box">
+            INDUSTRY
+          </div>
+          <div class="summary-box value" style="color: #111; font-weight: normal" id="productIndustryField"></div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="label-box">
+            CHALLENGES
+          </div>
+          <div class="summary-box value" style="color: #111; font-weight: normal" id="productChallengesField"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section" style="margin-bottom: 50px">
+      <h2>2. Feature & Benefit to Problem Mapping</h2>
+      <div class="report-box" style="background-color: transparent; padding: 0;">
+        <div class="tableWrapper">
+          <table id="mappingTable">
+            <thead>
+              <tr style="font-size: 1.25rem !important;">
+                <th class="rounded-top-left">Category</th>
+                <th>Problem</th>
+                <th>Pain</th>
+                <th>Urgency</th>
+                <th class="rounded-top-right">Score</th>
+              </tr>  
+            </thead>
+            <tbody style="font-weight: none !important; color: white" id="mappingBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="report-section" style="margin-bottom: 50px">
+      <h2>3. Problem Breakdown Elements</h2>
+      <div class="report-box" style="background-color: transparent !important; padding: 0 !important;">
+        <div class="tableWrapper">
+          <table class="report-table vertical-table" id="breakdownTable">
+            <thead>
+              <tr>
+                <th class="rounded-top-left" style="background-color: #bebebe !important;">Attribute</th>
+                <th>Problem 1</th>
+                <th>Problem 2</th>
+                <th class="rounded-top-right">Problem 3</th>
+              </tr>
+            </thead>
+            <tbody id="breakdownBody">
+              <tr><td style="background-color: #bebebe !important">Problem Name</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Person / Group Affected</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Underlying Problem</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Impact</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Pain Caused</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Circumstance</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Unaddressed Consequences</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Unaddressed Risk</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Benefit Created</td><td></td><td></td><td></td></tr>
+              <tr><td style="background-color: #bebebe !important">Opportunity Created</td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section" style="margin-bottom: 50px">
+      <h2>4. Final Problem Statements</h2>
+      <div class="six-pair-wrapper">
+        <div id="statementsBox">
+          <div class="row" style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 1rem;">
+            <h3 style="margin: 0;">Edit Problem Statements and Elevator Pitches if needed:</h3>
+            <button onclick="saveEdits()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="report-box" style="background-color: transparent !important; padding: 0 !important;">    </div> -->
+
+    <div class="report-section" id="recommendationsSection">
+      <h2>5. Insights & Recommendations</h2>
+      <div class="report-box" id="recommendationBox">
+        <h4 style="color: white"><u>Areas of Focus</u></h4>
+        <div style="color: white">Problem statements reveal critical friction in delivery or Customer experience. Key Recommendations:</div>
+        <div class="recommendation-row"><span class="recommendation-label">Validate:</span><span class="recommendation-text" id="recValidate">Loading…</span></div>
+        <div class="recommendation-row"><span class="recommendation-label">Refine:</span><span class="recommendation-text" id="recRefine">Loading…</span></div>
+        <div class="recommendation-row"><span class="recommendation-label">Prioritise:</span><span class="recommendation-text" id="recPrioritise">Loading…</span></div>
+        <div class="recommendation-row"><span class="recommendation-label">Align:</span><span class="recommendation-text" id="recAlign">Loading…</span></div>
+        <div class="recommendation-row"><span class="recommendation-label">Extend:</span><span class="recommendation-text" id="recExtend">Loading…</span></div>
+      </div>
+      <div><br>
+        <h4 style="color: white"><u>Next Steps</u></h4>
+        <ul style="color: white">
+          <li>Validate Problem Statements and Pitches with 3–5 real Customers</li>
+          <li>Trace misaligned messaging back to Features & Benefits</li>
+          <li>Explore opportunities to reposition marketing materials around core Customer problems</li>
+        </ul>
+      </div>
+    </div>
+
+
+  <div class="button-container">
+    <button onclick="copyReport()">Copy Report</button>
+    <!-- <button onclick="downloadPDF()">Download PDF</button> -->
+  </div>
+
+  <script>
+    const input = JSON.parse(localStorage.getItem('userInput') || '{}');
+    const titles = JSON.parse(localStorage.getItem('finalTitles') || '[]');
+    const statements = JSON.parse(localStorage.getItem('finalStatements') || '[]');
+    const full = JSON.parse(localStorage.getItem('fullResult') || '{}');
+
+    function fillBreakdown() {
+      const tbody = document.getElementById("breakdownBody");
+      tbody.innerHTML = "";
+
+      const full = JSON.parse(localStorage.getItem("fullResult") || "{}");
+      const elements = full.problem_elements || [];
+
+      if (!Array.isArray(elements) || elements.length === 0) return;
+
+      const attributes = [
+        "Problem Name",
+        "Person or Group affected",
+        "Underlying Problem",
+        "Impact",
+        "Pain Caused",
+        "Circumstance",
+        "Consequences Unaddressed",
+        "Risk Unaddressed",
+        "Benefit Created",
+        "Opportunity Created"
+      ];
+
+      attributes.forEach(attr => {
+        const row = document.createElement("tr");
+        const labelCell = document.createElement("td");
+        labelCell.textContent = attr;
+        row.appendChild(labelCell);
+
+        for (let i = 0; i < 3; i++) {
+          const cell = document.createElement("td");
+          cell.textContent = elements[i] && elements[i][attr] ? elements[i][attr] : "-";
+          row.appendChild(cell);
+        }
+
+        tbody.appendChild(row);
+      });
+    }
+
+
+      async function runFullAnalysis() {
+        document.getElementById("loadingNotice").style.display = "block";
+
+        try {
+          const headers = { "Content-Type": "application/json" };
+
+          updateProgressBar(20); // 💡 Immediate visual feedback
+
+          const derivationRes = await fetch("/fx1/problem-derivation", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) });
+            updateProgressBar(30);
+
+          const problemsRes = await fetch("/fx1/problems", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) });
+          updateProgressBar(50);
+
+          const elementsRes = await fetch("/fx1/elements", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) });
+          updateProgressBar(60);
+
+          const elementsData = await elementsRes.json();
+          updateProgressBar(80);
+
+          const statementsRes = await fetch("/fx1/statements", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) });
+          updateProgressBar(100);
+
+          const derivationData = await derivationRes.json();
+          const problemsData = await problemsRes.json();
+          const statementsData = await statementsRes.json();
+          const elevatorRes = await fetch("/fx1/elevator", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ...input,
+                problem_elements: elementsData.problem_elements || []
+              })
+            });
+          const elevatorData = (await elevatorRes.json()).content;
+
+          const pitchTexts = elevatorData.problem_statements?.map(p => p.statement) || [];
+
+          const full = {
+            features: Array.isArray(problemsData.features) ? problemsData.features : [],
+            benefits: Array.isArray(problemsData.benefits) ? problemsData.benefits : [],
+            problem_elements: elementsData.problem_elements || [],
+            statements: statementsData.statements || [],
+            titles: statementsData.titles || [],
+            prioritised_problems: problemsData?.prioritised_problems || {},
+            full_problem_table: problemsData?.prioritised_problems?.full_problem_table || []
+          };
+
+          localStorage.setItem("finalStatements", JSON.stringify(full.statements));
+          localStorage.setItem("finalTitles", JSON.stringify(full.titles));
+          localStorage.setItem("fullResult", JSON.stringify(full));
+          localStorage.setItem("elevatorTitles", JSON.stringify(elevatorData.elevator_titles || []));
+          const pitchObjects = elevatorData.pitch_statements?.map((text, i) => ({
+            heading: elevatorData.elevator_titles?.[i] || `Elevator Pitch ${i + 1}`,
+            text
+          })) || [];
+
+          localStorage.setItem("elevatorPitches", JSON.stringify(pitchObjects));
+
+          // Fetch and render Recommendations
+          const recommendationsRes = await fetch("/fx1/recommendations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...input,
+              problem_elements: full.problem_elements || []
+            })
+          });
+
+          const recData = await recommendationsRes.json();
+          const summary = recData?.report_summary || {};
+
+          document.getElementById("recValidate").textContent = summary.validate || "No input.";
+          document.getElementById("recRefine").textContent = summary.refine || "No input.";
+          document.getElementById("recPrioritise").textContent = summary.prioritise || "No input.";
+          document.getElementById("recAlign").textContent = summary.align || "No input.";
+          document.getElementById("recExtend").textContent = summary.extend || "No input.";
+
+          fillSummary();
+
+          console.log("🧪 FEATURES", full.features);
+          console.log("🧪 BENEFITS", full.benefits);
+
+          fillTable();
+          fillBreakdown();
+          fillStatements();
+          bindEdits();
+
+          document.getElementById("loadingNotice").style.display = "none";
+          
+        } catch (err) {
+          document.getElementById("loadingNotice").style.display = "none";
+          alert("❌ Error during analysis sequence. Please retry.");
+          console.error(err);
+        }
+      }
+
+      if (input && input.product_name) {
+        fillSummary();
+        fillBreakdown(); // 🧹 Added here to preload
+      }
+
+      if (input && input.product_name) {
+        runFullAnalysis();
+      }
+
+    // SECTION 2
+    function fillSummary() {
+      const c = input.customer_context || {};
+        document.getElementById("productNameField").textContent = input.product_name || "N/A";
+        document.getElementById("productSummaryField").textContent = input.product_summary || "N/A";
+        document.getElementById("productCustomerField").textContent = c.description || "N/A";
+        document.getElementById("productIndustryField").textContent = c.industry || "N/A";
+        document.getElementById("productChallengesField").textContent = c.challenges || "N/A";
+    }
+
+    // SECTION 3
+    function fillTable() {
+      const tbody = document.getElementById("mappingBody");
+      tbody.innerHTML = "";
+
+      const full = JSON.parse(localStorage.getItem('fullResult') || '{}');
+
+      const features = full.features || [];
+      const benefits = full.benefits || [];
+
+      const featureTitles = JSON.parse(localStorage.getItem("finalFeatureTitles") || "[]");
+      const benefitTitles = JSON.parse(localStorage.getItem("finalBenefitTitles") || "[]");
+
+      console.log("🧩 FEATURES (inside fillTable):", features);
+      console.log("🧩 BENEFITS (inside fillTable):", benefits);
+
+      if (features.length) {
+        tbody.innerHTML += `<tr><td colspan="5" class="section-label" style="background-color: #bebebe !important; color: black">Features</td></tr>`;
+        features.forEach((item) => {
+          tbody.innerHTML += `<tr>
+            <td>${item.title || "-"}</td>
+            <td>${item.problem || "-"}</td>
+            <td>${item.pain || "-"}</td>
+            <td>${item.urgency || "-"}</td>
+            <td><strong>${item.score || "-"}</strong></td>
+          </tr>`;
+        });
+      }
+
+      if (benefits.length) {
+        tbody.innerHTML += `<tr><td colspan="5" class="section-label" style="background-color: #bebebe !important; color: black">Benefits</td></tr>`;
+        benefits.forEach((item) => {
+          tbody.innerHTML += `<tr>
+            <td>${item.title || "-"}</td>
+            <td>${item.problem || "-"}</td>
+            <td>${item.pain || "-"}</td>
+            <td>${item.urgency || "-"}</td>
+            <td><strong>${item.score || "-"}</strong></td>
+          </tr>`;
+        });
+      }
+
+      if (!features.length && !benefits.length) {
+        tbody.innerHTML += `<tr><td colspan="5">No mapping data found.</td></tr>`;
+      }
+    }
+
+    // SECTION 4
+    function fillStatements() {
+      const box = document.getElementById('statementsBox');
+      const statements = JSON.parse(localStorage.getItem("finalStatements") || "[]");
+      const titles = JSON.parse(localStorage.getItem("finalTitles") || "[]");
+      
+      const elevatorTitles = JSON.parse(localStorage.getItem("elevatorTitles") || "[]");
+      const elevatorPitches = JSON.parse(localStorage.getItem("elevatorPitches") || "[]");
+
+      statements.forEach((statement, i) => {
+        const full = JSON.parse(localStorage.getItem('fullResult') || '{}');
+        const elements = full.problem_elements || [];
+        const title = (elements[i] && elements[i]["Problem Name"]) ? elements[i]["Problem Name"] : `Problem ${i + 1}`;
+
+        const div = document.createElement("div");
+        div.className = "problem-pitch-row";
+
+        const problemBox = document.createElement("div");
+        problemBox.className = "problem-box";
+        problemBox.innerHTML = `
+          <div class="box-heading">Problem ${i + 1} – ${title}</div>
+          <textarea class="full-width-input" rows="4">${typeof statement === "string" ? statement : (statement?.statement || "")}</textarea>
+        `;
+        div.appendChild(problemBox);
+
+                // --- Elevator Pitch Label ---
+        const pitchBox = document.createElement("div");
+        pitchBox.className = "pitch-box";
+        pitchBox.innerHTML = `
+          <div class="box-heading">Pitch ${i + 1}</div>
+          <textarea class="full-width-input" rows="3">${elevatorPitches[i]?.text || ""}</textarea>
+        `;
+        div.appendChild(pitchBox);
+
+
+        box.appendChild(div);
+      });
+    }
+
+
+    
+    function bindEdits() {
+      document.querySelectorAll('.full-width-input').forEach((input, i) => {
+        input.addEventListener('input', () => {
+          const updated = [...document.querySelectorAll('.full-width-input')].map((t, i) => {
+            return {
+              problem_name: `Problem ${i + 1}`, // Or you could pull this dynamically
+              statement: t.value.trim()
+            };
+          });
+          const updatedTitles = [...document.querySelectorAll('.report-box label')].map(label => {
+            const text = label.innerText || "";
+            const match = text.match(/– (.+)$/);
+            return match ? match[1].trim() : "";
+          });
+          localStorage.setItem('finalTitles', JSON.stringify(updatedTitles));
+          localStorage.setItem('finalStatements', JSON.stringify(updated));
+        });
+      });
+    }
+
+    function saveEdits() {
+      const allTextareas = [...document.querySelectorAll('.full-width-input')];
+
+      // Split into problems and pitches (assuming order: statement, pitch, statement, pitch...)
+      const updated = [];
+      const elevatorTitles = [];
+      const elevatorPitches = [];
+
+      for (let i = 0; i < allTextareas.length; i += 2) {
+        const statementInput = allTextareas[i];
+        const pitchInput = allTextareas[i + 1];
+
+        updated.push({
+          problem_name: `Problem ${updated.length + 1}`,
+          statement: statementInput.value.trim()
+        });
+
+        const heading = `Elevator Pitch ${updated.length + 1}`;
+        elevatorTitles.push(heading);
+        elevatorPitches.push({
+          heading,
+          text: pitchInput.value.trim()
+        });
+      }
+
+      localStorage.setItem('finalStatements', JSON.stringify(updated));
+      localStorage.setItem('finalTitles', JSON.stringify(updated.map(u => u.problem_name)));
+      localStorage.setItem('elevatorTitles', JSON.stringify(elevatorTitles));
+      localStorage.setItem('elevatorPitches', JSON.stringify(elevatorPitches));
+
+      alert("Changes saved.");
+
+      const updatedTitles = [...document.querySelectorAll('.report-box label')].map(label => {
+        const text = label.innerText || "";
+        const match = text.match(/– (.+)$/);
+        return match ? match[1].trim() : "";
+      });
+      localStorage.setItem('finalStatements', JSON.stringify(updated));
+      localStorage.setItem('finalTitles', JSON.stringify(updatedTitles));
+      alert("Changes saved.");
+    }
+
+    function copyReport() {
+      const text = document.getElementById('report').innerText;
+      navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard'));
+    }
+
+//    function downloadPDF() {
+//      const el = document.getElementById('report');
+//      html2pdf().from(el).save('Fx1_Report.pdf');
+//    }
+
+      function getProgressStatusMessage(percent) {
+        const progressPhases = {
+          20: "Reverse-engineering product and generating results, please wait...",
+          30: "Conducting the 5 Whys on Features and Benefits",
+          50: "Deriving underlying Customer problems and pain points",
+          60: "Analysing problem elements",
+          80: "Distilling Problem Statements and Elevator Pitches",
+          100: "Insights & Recommendations"        };
+        return progressPhases[percent] || "";
+      }
+
+    function updateProgressBar(percent) {
+      const bar = document.getElementById('progressBar');
+      const text = document.getElementById('progressText');
+      const status = document.getElementById('progressStatusMessage');
+
+      if (bar) {
+        bar.style.width = `${percent}%`;
+      }
+
+      if (text) {
+        text.textContent = `${percent}%`;
+      }
+
+      if (status) {
+        const message = getProgressStatusMessage(percent);
+        status.textContent = percent === 100 ? `✅ ${message}` : message;
+      }
+    }
+
+    
+  </script>
+</body>
+</html>

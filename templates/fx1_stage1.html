@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fx 1 – Stage 1: User Input</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .section { max-width: 800px; margin: 0 auto; }
+    label { font-weight: bold; display: block; margin-top: 1rem; }
+    input, textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; }
+    .row { display: flex; gap: 1rem; margin-top: 1rem; }
+    .row input:first-child { flex: 1; max-width: 40%; }
+    .row input:last-child { flex: 2; max-width: 60%; }
+    .feature-group, .benefit-group { margin-bottom: 1rem; }
+    .button-container { margin-top: 2rem; text-align: right; }
+    button { padding: 0.6rem 1.2rem; border: none; background-color: #0077cc; color: white !important; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #005fa3; }
+  </style>
+</head>
+<body>
+
+  <div class="section">
+    <div style="margin-bottom:55px !important"></div>
+
+    <h1 style="color: #ffaa17 !important">Stage 1 – Enter Product Details</h1><br>
+    <form id="stage1aForm">
+      <h2 class="form-section-title" style="color: #ffaa17"><u>Option A</u></h2>
+      <label for="url">Paste URL of Existing Product Summary</label>
+      <div style="margin-bottom:5px !important"></div>
+      <input type="url" id="productURL" name="url" placeholder="Enter URL of a product webpage (with Features & Benefits)">
+      <div class="cta-button button-container">
+        <button class="button-primary" type="submit">Reverse-Engineer URL</button>
+      </div>
+    </form>
+
+    <form style="margin-top: 50px" id="stage1bForm">
+      <h2 class="form-section-title" style="color: #ffaa17"><u>Option B</u></h2>
+      <label for="productName">Product Name <span class="char-limit">(max 40 chars)</span></label>
+      <div style="margin-bottom:5px !important"></div>
+      <input type="text" id="productName" name="productName" maxlength="40">
+
+      <label for="productSummary">Product Summary <span class="char-limit">(max 100 chars)</span></label>
+      <div style="margin-bottom:5px !important"></div>
+      <textarea id="productSummary" name="productSummary" maxlength="100" rows="2"></textarea>
+
+      <div style="margin-bottom:35px !important"></div>
+      <hr class="field-divider">
+
+      <h3 class="form-section-subtitle">Features</h3>
+      <div style="margin-left: 20px" id="featureContainer"></div>
+      <button type="button-secondary" onclick="addFeature()">+ Add Feature</button>
+
+      <div style="margin-bottom:35px !important"></div>
+      <hr class="field-divider">
+
+      <h3>Benefits</h3>
+      <div style="margin-left: 20px" id="benefitContainer"></div>
+      <button type="-secondary" onclick="addBenefit()">+ Add Benefit</button>
+
+      <div style="margin-bottom:35px !important"></div>
+      <hr class="field-divider">
+
+      <h3 class="form-section-subtitle">Other Details</h3>      
+      <label for="customerDescription">Customer Description<span class="char-limit">(max 100 chars)</span></label>
+      <div style="margin-bottom:5px !important"></div>
+      <input type="text" id="customerDescription" maxlength="100">
+
+      <label for="industry">Industry / Segment<span class="char-limit">(max 100 chars)</span></label>
+      <div style="margin-bottom:5px !important"></div>
+      <input type="text" id="industry" maxlength="100">
+
+      <label for="challenges">Known Challenges<span class="char-limit">(max 100 chars)</span></label>
+      <div style="margin-bottom:5px !important"></div>
+      <input type="text" id="challenges" maxlength="100">
+
+      <div class="cta-button button-container">
+        <button class="button-primary" type="submit">Reverse-Engineer Product</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const featureContainer = document.getElementById('featureContainer');
+    const benefitContainer = document.getElementById('benefitContainer');
+
+      // ✅ Clear existing user input when reloading Stage 1
+      localStorage.removeItem("userInput");
+      localStorage.removeItem("fullResult");
+      localStorage.removeItem("mapping");
+      localStorage.removeItem("scores");
+      localStorage.removeItem("finalStatements");
+      localStorage.removeItem("finalTitles");
+      localStorage.removeItem("elevatorTitles");
+      localStorage.removeItem("elevatorPitches");
+
+
+    function createInputPair(prefix) {
+      const div = document.createElement('div');
+      div.className = `${prefix}-group row`;
+      div.innerHTML = `
+        <input type="text" maxlength="40" placeholder="Title (max 40 chars)">
+        <input type="text" maxlength="100" placeholder="Description (max 100 chars)">
+      `;
+      return div;
+    }
+
+    function addFeature() {
+      featureContainer.appendChild(createInputPair('feature'));
+    }
+
+    function addBenefit() {
+      benefitContainer.appendChild(createInputPair('benefit'));
+    }
+
+    // Preload 2 of each for convenience
+    addFeature();
+    addFeature();
+    addBenefit();
+    addBenefit();
+
+    document.getElementById('productURL').addEventListener('input', e => {
+      const isUrl = e.target.value.trim().length > 0;
+      document.querySelectorAll('#stage1bForm input, #stage1bForm textarea, #stage1bForm button')
+        .forEach(el => el.disabled = isUrl);
+    });
+
+    document.getElementById('stage1aForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const btn = e.target.querySelector('button');
+      btn.disabled = true;
+      btn.innerText = "Loading…";
+
+      const urlInput = document.getElementById("productURL").value.trim();
+      const hasManualInput = document.getElementById("productName").value.trim();
+
+      if (hasManualInput) {
+        alert("You've already started filling out the manual form. Please clear it or use that method.");
+        return;
+      }
+
+      if (!urlInput) {
+        alert("Please enter a valid URL.");
+        return;
+      }
+
+      try {
+        const res = await fetch("/fx1/url-extract", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: urlInput })
+        });
+
+        const data = await res.json();
+        if (!data || !data.product_name) {
+          alert("Could not extract valid content from the URL.");
+          return;
+        }
+
+        localStorage.setItem("userInput", JSON.stringify(data));
+        window.location.href = "/fx1_stage2";
+      } catch (err) {
+        alert("Error extracting data from URL.");
+        console.error(err);
+      }
+
+    });
+
+    document.getElementById('stage1bForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const urlInput = document.getElementById("productURL").value.trim();
+        if (urlInput) {
+          alert("You've already entered a URL. Please clear it or use that method.");
+          return;
+        }
+
+      const features = [...featureContainer.querySelectorAll('.row')].map(row => {
+        const inputs = row.querySelectorAll('input');
+        return { title: inputs[0].value, detail: inputs[1].value };
+      });
+
+      const benefits = [...benefitContainer.querySelectorAll('.row')].map(row => {
+        const inputs = row.querySelectorAll('input');
+        return { title: inputs[0].value, detail: inputs[1].value };
+      });
+
+      if (features.length === 0 && benefits.length === 0) {
+        alert("Please enter at least one feature or one benefit before proceeding.");
+        return;
+      }
+
+      const getSafeValue = (id) => {
+      const el = document.getElementById(id);
+      return el && el.value ? el.value.trim() : "";
+      };
+
+      const payload = {
+        product_name: getSafeValue('productName'),
+        product_summary: getSafeValue('productSummary'),
+        features,
+        benefits,
+        customer_context: {
+          description: getSafeValue('customerDescription') || "",
+          industry: getSafeValue('industry') || "",
+          challenges: getSafeValue('challenges') || ""
+        }
+      };
+
+      console.log("Payload being saved:", payload);
+      console.log("Customer context values:", {
+        challenges: getSafeValue('challenges'),
+        description: getSafeValue('customerDescription'),
+        industry: getSafeValue('industry')
+      });
+      // 🧹 Clear stale data from prior runs
+      ["fullResult", "finalStatements", "finalTitles"].forEach(key => localStorage.removeItem(key));
+
+      // Save current input and move to Stage 2
+      localStorage.setItem('userInput', JSON.stringify(payload));
+      window.location.href = '/fx1_stage2';
+
+    });
+
+  </script>
+    
+</body>
+</html>

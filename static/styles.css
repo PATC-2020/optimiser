@@ -1,0 +1,434 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  input[readonly], textarea[readonly] {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.5rem;
+    width: 100%;
+    margin: 0.25rem 0 1rem 0;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Replace the existing table-related CSS rules with these fixed versions */
+
+  #mappingTable, #breakdownTable {
+    width: 100%;
+    /* margin-top: 1rem; */
+    margin: 0;
+    color: black !important;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: none; /* Remove table border to prevent conflicts */
+    border-radius: 12px;
+    overflow: hidden; /* Ensure content stays within rounded corners */
+  }
+
+  #mappingTable, #breakdownTable tbody {
+    border-spacing: 0;
+  }
+
+  #mappingTable, #breakdownTable thead th {
+    background-color: #ffb400; /* Match border color exactly */
+    margin: 0;
+    color: #000;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.25rem;
+    border-right: 1px solid #000; /* Black 1px separators between headers */
+    border-bottom: none;
+  }
+
+  /* Remove border from last header column */
+  #mappingTable, #breakdownTable thead th:last-child {
+    border-right: none;
+  }
+
+  #mappingTable td {
+    background-color: #111;
+    color: #ffffff;
+    font-weight: none !important;
+    font-size: 1rem !important;
+    padding: 1rem;
+    border: 1px solid #333;
+  }
+
+  #breakdownTable td {
+    background-color: #111;
+    color: #ffffff;
+    font-weight: none !important;
+    font-size: 1rem !important;
+    padding: 1rem;
+    border: 1px solid #333;
+  }
+
+  /* Remove bold only from the 2nd column of Section 2 (mappingTable) */
+#mappingTable td:nth-child(2) {
+  font-weight: normal !important;
+}
+
+  /* Remove bold only from the 2nd, 3rd, and 4th columns of Section 3 (breakdownTable) */
+  #breakdownTable td:nth-child(2),
+  #breakdownTable td:nth-child(3),
+  #breakdownTable td:nth-child(4) {
+    font-weight: normal !important;
+  }
+
+  /* Fix corner radius to match wrapper */
+  #mappingTable, #breakdownTable tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+  }
+
+  #mappingTable, #breakdownTable tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+  }
+
+  /* Add bottom corner radius to prevent black encroachment */
+  #mappingTable, #breakdownTable tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+  }
+
+  #mappingTable, #breakdownTable tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+  }
+
+  .tableWrapper {
+    border: 2px solid #ffb400;
+    margin: 0;
+    border-radius: 12px;
+    padding: 0px;
+    display: inline-block;
+    overflow: hidden; /* Ensure table content doesn't overflow rounded corners */
+  }
+
+  .section-label {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  /* First column (Attribute column) lighter grey */
+  #breakdownTable td:first-child, #breakdownTable th:first-child {
+    background-color: #bebebe;
+    color: black;
+    font-weight: bold;
+  }
+
+  h1, h2, h3 {
+  color: #FFA500;
+}
+
+  
+  button {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border: none;
+    color: #333;
+    margin: 0;
+    padding: 0.6rem 1.2rem;
+  }
+
+    button:hover {
+    background-color: #005fa3;
+  }
+  
+   textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+  
+  .inner-problem-wrapper {
+    margin: 0 auto;
+    max-width: 960px; /* or match whatever your other sections use */
+  }
+  
+  
+  .hero-section {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #FFA500;
+  line-height: 1.3;
+}
+
+.hero-subtitle {
+  color: #ccc;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.char-limit {
+  color: #FFA500;
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+
+input[type=\"text\"], input[type=\"url\"], textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  color: #000;
+}
+
+.field-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.field-pair > div {
+  flex: 1;
+  min-width: 240px;
+}
+
+.button-primary {
+  background-color: #FFA500;
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+    margin-top: .05rem; /* Reduce from 1.5rem or 2rem if that was used */
+
+}
+
+.button-secondary {
+  background-color: #222;
+  color: #FFA500;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #FFA500;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  margin-top: .05rem; /* Reduce from 1.5rem or 2rem if that was used */
+}
+
+.field-divider {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 1.5rem 0;
+  opacity: 0.4;
+}
+
+/* Header and Footer Additions */
+.main-header {
+  background-color: #000;
+  padding: 10px 0;
+  border-bottom: 2px solid #FFA500;
+}
+
+.main-header .logo-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-header .logo-box a {
+  text-decoration: none;
+  font-family: 'Teko', sans-serif;
+  font-size: 28px;
+  color: white;
+}
+
+.main-header img {
+  height: 40px;
+}
+
+.main-footer {
+  background-color: #000;
+  color: #fff;
+  padding: 30px 0;
+  font-size: 0.95rem;
+  margin-top: 80px;
+}
+
+.main-footer a {
+  color: #FFA500;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.row input {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+input:disabled,
+textarea:disabled {
+  background-color: #fff !important;
+  color: #000 !important;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.summary-grid {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+.label-box {
+  display: block;
+  background-color: #ff6a00;
+  color: white;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 150px;
+  flex: 0 0 150px;
+}
+
+.label-box .value {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: normal;
+  color: black;
+}
+
+.summary-box {
+  display: block;
+  background-color: #ffb400;
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  text-align: left;
+  flex: 1;
+}
+
+.summary-box .value {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: normal;
+  color: #111;
+  white-space: pre-line;
+}
+
+.report-box {
+background-color: #111 !important;
+padding: none;
+}
+
+/* Outer container that mimics Section 2 & 3 border style */
+.six-pair-wrapper {
+  border: 2px solid #ffb400;
+  border-radius: 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Row container: each row has one Problem and one Pitch */
+.problem-pitch-row {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid #333;
+}
+
+/* Reset top border for the first row */
+.problem-pitch-row:first-child {
+  border-top: none;
+}
+
+/* Each cell inside the row */
+.problem-box, .pitch-box {
+  flex: 1;
+  padding: 1.25rem;
+  background-color: #111;
+  color: white;
+  min-width: 280px;
+  box-sizing: border-box;
+  border-right: 1px solid #333;
+}
+
+/* Remove right border from the Pitch box */
+.pitch-box {
+  border-right: none;
+}
+
+/* Headings inside each box */
+.problem-box .box-heading,
+.pitch-box .box-heading {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #FFA500;
+  margin-bottom: 0.5rem;
+}
+
+/* Body text inside each box */
+.problem-box .box-content,
+.pitch-box .box-content {
+  font-weight: normal;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.recommendation-row {
+  display: flex;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.recommendation-row:last-child {
+  border-bottom: none;
+}
+
+.recommendation-label {
+  flex: 0 0 120px;
+  font-weight: bold;
+  color: #FFA500;
+}
+
+.recommendation-text {
+  flex: 1;
+  color: white;
+  font-size: 0.95rem;
+}
