@@ -432,3 +432,22 @@ padding: none;
   color: white;
   font-size: 0.95rem;
 }
+
+/* Mobile responsive styles for summary boxes */
+@media (max-width: 768px) {
+  .summary-grid {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .label-box {
+    flex: none;
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .summary-box {
+    flex: none;
+    width: 100%;
+  }
+}
