@@ -163,7 +163,7 @@
 
   <div class="button-container">
     <button onclick="copyReport()">Copy Report</button>
-    <!-- <button onclick="downloadPDF()">Download PDF</button> -->
+    <button onclick="downloadPDF()">Download PDF</button>
   </div>
 
   <script>
@@ -505,10 +505,20 @@
       alert("Copied to clipboard");
     }
 
-//    function downloadPDF() {
-//      const el = document.getElementById('report');
-//      html2pdf().from(el).save('Fx1_Report.pdf');
-//    }
+    function downloadPDF() {
+      const el = document.getElementById('report'); // exports exactly what's on screen in #report
+
+      const opt = {
+        margin:       10,
+        filename:     'Fx1_Report.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: null },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
+      };
+
+      html2pdf().set(opt).from(el).save();
+    }
 
       function getProgressStatusMessage(percent) {
         const progressPhases = {
