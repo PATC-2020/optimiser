@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fx1 – Stage 2 (AI Report)</title>
   <link rel="stylesheet" href="/static/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     body { font-family: sans-serif; padding: 2rem; }
     .report-section { margin-bottom: 2rem; }
@@ -163,7 +162,9 @@
 
   <div class="button-container">
     <button onclick="copyReport()">Copy Report</button>
-    <button onclick="downloadPDF()">Download PDF</button>
+    <button onclick="window.print()">Download PDF</button>
+    <button onclick="printPDF()">Download PDF</button>
+
   </div>
 
   <script>
@@ -503,29 +504,6 @@
       document.execCommand("copy");
       document.body.removeChild(textarea);
       alert("Copied to clipboard");
-    }
-
-    function downloadPDF() {
-      const el = document.getElementById('report');
-
-      const opt = {
-        margin: 0,
-        filename: 'Fx1_Report.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: '#111',
-          scrollX: 0,
-          scrollY: 0,
-          windowWidth: el.scrollWidth,
-          windowHeight: el.scrollHeight
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-
-      html2pdf().set(opt).from(el).save();
     }
 
       function getProgressStatusMessage(percent) {
