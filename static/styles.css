@@ -451,3 +451,11 @@ padding: none;
     width: 100%;
   }
 }
+
+/* PDF export: prevent cut-offs */
+#report, #report * { box-sizing: border-box; }
+.summary-grid, .tableWrapper, .six-pair-wrapper, .problem-pitch-row, .report-section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+table { break-inside: avoid; page-break-inside: avoid; }

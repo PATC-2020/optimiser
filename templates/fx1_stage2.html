@@ -506,15 +506,23 @@
     }
 
     function downloadPDF() {
-      const el = document.getElementById('report'); // exports exactly what's on screen in #report
+      const el = document.getElementById('report');
 
       const opt = {
-        margin:       10,
-        filename:     'Fx1_Report.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: null },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'] }
+        margin: 0,
+        filename: 'Fx1_Report.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#111',
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: el.scrollWidth,
+          windowHeight: el.scrollHeight
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
 
       html2pdf().set(opt).from(el).save();
